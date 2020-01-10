@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="dao" class="service.ProductDao">
+		<property name="vo" ref="vo"></property>
+	</bean>
+	<bean id="vo" class="service.ProductVo">
+		<property name="name" value="컴퓨러"></property>
+		<property name="code" value="1000"></property>
+		<property name="price" value="800000"></property>
+	</bean>
+
+	<bean id="psgen" class="service.ProductServiceGeneral">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	<bean id="ps5" class="service.ProductService5">
+			<property name="dao" ref="dao"></property>
+	</bean>
+	<bean id="ps12" class="service.ProductService12">
+			<property name="dao" ref="dao"></property>
+	</bean>
+
+</beans>

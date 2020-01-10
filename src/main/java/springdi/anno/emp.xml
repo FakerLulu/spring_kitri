@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<bean id="emp1" class="springdi.anno.EmpVo">
+		<property name="id" value="100"></property>
+		<property name="name" value="야이야"></property>
+		<property name="salary" value="123.99"></property>
+	</bean>
+<!-- 	<bean id="dao" class="springdi.anno.EmpDao">
+		<property name="vo" ref="emp1"></property>
+	</bean> -->
+
+<context:component-scan base-package="springdi.anno"></context:component-scan>
+</beans>
