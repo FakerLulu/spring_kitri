@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<bean id="member" class="aoptest1.Member"></bean>
+	<bean id="board" class="aoptest1.Board"></bean>
+	<bean id="common" class="aoptest1.Common"></bean>
+	<aop:config>
+		<aop:pointcut
+			expression="execution(* aoptest1.*.*(..))" id="pc" />
+		<aop:aspect id="com" ref="common">
+			<aop:before method="print" pointcut-ref="pc"/>
+<!-- 			<aop:after-returning method="printResult" pointcut-ref="pc" returning="retVal"/> -->
+			<aop:around method="printAround" pointcut-ref="pc"/>
+		</aop:aspect>
+	</aop:config>
+</beans>
