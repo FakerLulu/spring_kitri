@@ -1,4 +1,4 @@
-package board;
+package kitri.edu.mvc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -66,13 +66,16 @@ public class BoardDAO {
 		try (PreparedStatement ps = conn.prepareStatement("select * from board where seq = " + seq);
 				ResultSet rs = ps.executeQuery()) {
 			if (rs.next()) {
-
+				if (boardVO == null) {
+					boardVO = new BoardVO();
+				}
 				boardVO.setSeq(rs.getInt("seq"));
 				boardVO.setTitle(rs.getString("title"));
 				boardVO.setContents(rs.getString("contents"));
 				boardVO.setWriter(rs.getString("writer"));
 				boardVO.setTime(new SimpleDateFormat().format(rs.getDate("time")));
 				boardVO.setViewcount(rs.getInt("viewcount"));
+				System.out.println(seq + " dao 검색 결과 : " + rs.getString("title"));
 			}
 		} catch (Exception e) {
 		}
