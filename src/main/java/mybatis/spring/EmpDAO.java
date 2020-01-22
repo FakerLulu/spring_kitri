@@ -1,137 +1,135 @@
-package mybatis;
+package mybatis.spring;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@Repository
+@Component
 public class EmpDAO {
-	SqlSession sqls;
-
-	public void setSqls(SqlSession sqls) {
-		this.sqls = sqls;
-	}
+	@Autowired
+	SqlSession session;
 
 	public List<EmpVO> getAllEmp() {
-		if (sqls == null) {
+		if (session == null) {
 			System.out.println("세션 설정 안됨");
 			return new ArrayList<EmpVO>();
 		}
-		List<EmpVO> list = sqls.selectList("allemp");
-		sqls.close();
+		List<EmpVO> list = session.selectList("allemp");
+		// session.close();
 		return list;
 
 	}
 
 	public EmpVO getOneEmp(int id) {
-		if (sqls == null) {
+		if (session == null) {
 			System.out.println("세션 설정 안됨");
 			return new EmpVO();
 		}
-		EmpVO vo = sqls.selectOne("a.oneemp", id);// sql에 변수 할당을 위해서 이렇게 함. id를 너었다.
-		sqls.close();
+		EmpVO vo = session.selectOne("a.oneemp", id);// sql에 변수 할당을 위해서 이렇게 함. id를 너었다.
+		// session.close();
 		return vo;
 	}
 
 	public List<EmpVO> getManyEmp(int id) {
-		if (sqls == null) {
+		if (session == null) {
 			System.out.println("세션 설정 안됨");
 			return new ArrayList<EmpVO>();
 		}
-		List<EmpVO> list = sqls.selectList("a.manyemp", id);
-		sqls.close();
+		List<EmpVO> list = session.selectList("a.manyemp", id);
+		// session.close();
 		return list;
 	}
 
 	public int insertEmp(EmpVO vo) {
-		if (sqls == null) {
+		if (session == null) {
 			System.out.println("세션 설정 안됨");
 			return 0;
 
 		}
-
-		int result = sqls.insert("a.insertemp", vo);
+		System.out.println(vo);
+		int result = session.insert("a.insertemp", vo);
 //		sqls.commit();
-		sqls.close();
+		// session.close();
 		return result;
 	}
 
 	public int updateEmp(EmpVO vo) {
-		if (sqls == null) {
+		if (session == null) {
 			System.out.println("세션 설정 안됨");
 			return 0;
 
 		}
 
-		int result = sqls.insert("a.updateemp", vo);
-		sqls.close();
+		int result = session.insert("a.updateemp", vo);
+		// session.close();
 		return result;
 	}
 
 	public int deleteEmp(int id) {
-		if (sqls == null) {
+		if (session == null) {
 			System.out.println("세션 설정 안됨");
 			return 0;
 
 		}
 
-		int result = sqls.delete("a.deleteemp", id);
-		sqls.close();
+		int result = session.delete("a.deleteemp", id);
+		// session.close();
 		return result;
 	}
 
 	public int getAllEmpCount() {
-		if (sqls == null) {
+		if (session == null) {
 			System.out.println("세션 설정 안됨");
 			return 0;
 		}
 
-		int result = sqls.selectOne("a.empcount");
-		sqls.close();
+		int result = session.selectOne("a.empcount");
+		// session.close();
 		return result;
 	}
 
 	public List<EmpVO> getPagingEmp(int[] param) {
-		if (sqls == null) {
+		if (session == null) {
 			System.out.println("세션 설정 안됨");
 			return new ArrayList<EmpVO>();
 		}
 
-		List<EmpVO> result = sqls.selectList("a.emppaging", param);
-		sqls.close();
+		List<EmpVO> result = session.selectList("a.emppaging", param);
+		// session.close();
 		return result;
 	}
 
 	public List<EmpVO> getDepartEmp(int[] deptparam) {
-		if (sqls == null) {
+		if (session == null) {
 			System.out.println("세션 설정 안됨");
 			return new ArrayList<EmpVO>();
 		}
-		List<EmpVO> result = sqls.selectList("a.empdeptid", deptparam);
-		sqls.close();
+		List<EmpVO> result = session.selectList("a.empdeptid", deptparam);
+		// session.close();
 		return result;
 	}
 
 	public List<EmpVO> getDepartEmp2(ArrayList<Integer> departparam2) {
-		if (sqls == null) {
+		if (session == null) {
 			System.out.println("세션 설정 안됨");
 			return new ArrayList<EmpVO>();
 		}
-		List<EmpVO> result = sqls.selectList("a.empdeptid2", departparam2);
-		sqls.close();
+		List<EmpVO> result = session.selectList("a.empdeptid2", departparam2);
+		// session.close();
 		return result;
 	}
 
 	public List<EmpVO> getEmpDynamicWhere(HashMap<String, String> mapmap) {
-		if (sqls == null) {
+		if (session == null) {
 			System.out.println("세션 설정 안됨");
 			return new ArrayList<EmpVO>();
 		}
-		List<EmpVO> result = sqls.selectList("a.empdynamic", mapmap);
-		sqls.close();
+		List<EmpVO> result = session.selectList("a.empdynamic", mapmap);
+		// session.close();
 		return result;
 	}
 }

@@ -17,8 +17,8 @@
 	</select>
 
 	<insert id="insertemp" parameterType="emp">
-		insert into employees (employee_id, last_name, email, hire_date, job_id)
-		values(#{employee_id},#{last_name},#{email},sysdate,#{job_id})
+		insert into employees (employee_id, first_name,last_name, email, hire_date, job_id)
+		values(#{employee_id},#{first_name},#{last_name},#{email},sysdate,#{job_id})
 	</insert>
 	
 	<update id="updateemp" parameterType="emp">

@@ -47,7 +47,7 @@
 	</beans:bean> -->
 
 	<context:component-scan
-		base-package="kitri.edu.mvc, bakery,fileupload" /> 
+		base-package="mybatis.spring" /> 
 
 <!-- <context:component-scan base-package="board, member" />
  -->

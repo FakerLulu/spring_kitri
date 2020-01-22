@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+   <!-- 0. -->
+   <!-- <typeAliases> <typeAlias type="mybatis.EmpVO" alias="emp"/> </typeAliases> -->
+   <!-- "select * from employees -> empvo 형태저장 <select id="" resultType="kitri.edu.mvc.EmpVO"/> -->
+
+   <!-- 1. 드라이버 이름, 연결한 db ip, port, 계정, 암호 설정 -->
+   <bean id="dataSource"
+      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+      <property name="driverClassName"
+         value="oracle.jdbc.driver.OracleDriver" />
+      <property name="url"
+         value="jdbc:oracle:thin:@localhost:1521:xe" />
+      <property name="username" value="hr" />
+      <property name="password" value="hr" />
+   </bean>
+
+   <!-- 2. SqlSessionFactory 생성 스프링 - qlSessionFactoryBean설정 -->
+   <bean id="sqlSessionFactory"
+      class="org.mybatis.spring.SqlSessionFactoryBean">
+      <!-- setter -->
+      <property name="dataSource" ref="dataSource" />
+      <property name="configLocation"
+         value="classpath:/mybatis/spring/mybatis-config.xml" />
+      <property name="mapperLocations"
+         value="classpath:/mybatis/spring/*-mapping.xml" />
+   </bean>
+
+   <!-- 3. mybatis 일때 sqlsession 객체 생성 설정 스프링 - sqlsessiontemplate(A a1) - 
+      생성설정 -->
+   <bean id="sqlSession"
+   	class="org.mybatis.spring.SqlSessionTemplate">
+   	<!-- 생성자 호출 -->
+   	<constructor-arg ref="sqlSessionFactory"></constructor-arg>
+   </bean>
+</beans>
