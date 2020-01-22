@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- 0.타입 지정 (vo같은걸 간단한 이름으로 지정해놓고 사용 가능) -->
+	<typeAliases>
+		<typeAlias type="mybatis.EmpVO" alias="emp" />
+	</typeAliases>
+	<!-- 1.드라이버, ip, port, 계정, 암호설정 -->
+	<!-- default에는 환경설정중에 id 하나 정해서 쓰자. 하나만 있으면 없어도 됨 -->
+	<environments default="mymy">
+		<environment id="mymy">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver"
+					value="oracle.jdbc.driver.OracleDriver"></property>
+				<property name="url"
+					value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+				<property name="username" value="hr"></property>
+				<property name="password" value="hr"></property>
+
+			</dataSource>
+		</environment>
+	</environments>
+	<!-- 2.테이블 sql 정의한 매핑 파일 설정(프로젝트 내에서의 위치를 찾도록 하자) -->
+	<mappers>
+		<mapper resource="mybatis/emp-mapping.xml" />
+	</mappers>
+</configuration>

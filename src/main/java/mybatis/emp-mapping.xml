@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="a">
+	<select id="allemp" resultType="emp">
+		select * from employees
+	</select>
+
+	<select id="oneemp" resultType="emp" parameterType="int">
+		select
+		* from employees where employee_id = #{id}
+	</select>
+
+	<select id="manyemp" resultType="emp" parameterType="int">
+		<![CDATA[select * from employees where employee_id <= #{지금까지이런맛은없었다이것은갈비인가통닭인가}]]>
+	</select>
+
+	<insert id="insertemp" parameterType="emp">
+		insert into employees (employee_id, last_name, email, hire_date, job_id)
+		values(#{employee_id},#{last_name},#{email},sysdate,#{job_id})
+	</insert>
+	
+	<update id="updateemp" parameterType="emp">
+		update employees set last_name=#{last_name} where employee_id = #{employee_id}
+	</update>
+	
+	<delete id="deleteemp" parameterType="int">
+		delete from employees where employee_id = #{id}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
